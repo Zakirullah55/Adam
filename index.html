@@ -1,0 +1,2931 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شادی کا دعوت</title>
+    <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.10.0/dist/index.umd.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap');
+        
+        :root {
+            --primary-color: #ffcc29;
+            --secondary-color: #ff5e57;
+            --accent-color: #25D366;
+            --dark-color: #222;
+            --light-color: #fff;
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            --player-bg: rgba(30, 30, 40, 0.7);
+            --player-highlight: #9b59b6;
+            --player-text: #f1f1f1;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            background: #000;
+            text-align: center;
+            direction: rtl;
+            padding: 20px;
+            color: var(--light-color);
+            margin: 0;
+            overflow-x: hidden;
+            animation: fadeIn 1.5s ease-in-out;
+            min-height: 100vh;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .card {
+            background: var(--glass-bg);
+            border-radius: 20px;
+            box-shadow: var(--glass-shadow);
+            padding: 25px;
+            max-width: 90%;
+            width: 500px;
+            margin: 0 auto;
+            backdrop-filter: blur(10px);
+            animation: slideIn 1s ease-in-out;
+            position: relative;
+            z-index: 10;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            font-size: clamp(24px, 5vw, 32px);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+        
+        .details {
+            font-size: clamp(16px, 4vw, 20px);
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        
+        .fireworks-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            font-size: clamp(14px, 3.5vw, 18px);
+            padding: 12px 20px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            width: 48%;
+            min-width: 120px;
+            text-decoration: none;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+            color: var(--light-color);
+            border: none;
+            background: rgba(30, 30, 40, 0.4);
+            box-shadow: 
+                0 10px 25px rgba(0, 0, 0, 0.3),
+                0 2px 5px rgba(255, 255, 255, 0.1) inset,
+                0 -2px 5px rgba(0, 0, 0, 0.1) inset;
+            backdrop-filter: blur(5px);
+            transform-style: preserve-3d;
+            transform: perspective(1000px) translateZ(0) rotateX(0deg);
+            transition: 
+                transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                box-shadow 0.4s ease,
+                background 0.3s ease;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: 1;
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+            box-shadow: 0 0 15px 3px var(--glow-color, #00eeff);
+        }
+        
+        .btn:hover {
+            transform: perspective(1000px) translateZ(10px) rotateX(5deg) scale(1.05);
+            box-shadow: 
+                0 15px 30px rgba(0, 0, 0, 0.4),
+                0 5px 15px rgba(255, 255, 255, 0.1) inset,
+                0 -2px 5px rgba(0, 0, 0, 0.2) inset;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover::after {
+            opacity: 1;
+        }
+        
+        .btn:active {
+            transform: perspective(1000px) translateZ(-5px) rotateX(-2deg) scale(0.95);
+            box-shadow: 
+                0 5px 15px rgba(0, 0, 0, 0.2),
+                0 2px 5px rgba(255, 255, 255, 0.1) inset,
+                0 -2px 5px rgba(0, 0, 0, 0.1) inset;
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+        
+        .btn i {
+            font-size: 1.2em;
+            filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));
+            z-index: 2;
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+        
+        .btn span {
+            z-index: 2;
+            position: relative;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-2px); }
+        }
+        
+        .btn .btn-glow {
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            opacity: 0.7;
+            z-index: -1;
+            filter: blur(20px);
+            transform: translateZ(-10px);
+        }
+        
+        .whatsapp-button {
+            --glow-color: #25D366;
+            background: linear-gradient(135deg, typ 
+                rgba(37, 211, 102, 0.7), 
+                rgba(18, 140, 126, 0.7));
+        }
+        
+        .whatsapp-button .btn-glow {
+            background: linear-gradient(135deg, 
+                rgba(37, 211, 102, 0.8), 
+                rgba(18, 140, 126, 0.4));
+            animation: whatsappGlow 3s infinite alternate;
+        }
+        
+        @keyframes whatsappGlow {
+            0% { opacity: 0.3; filter: blur(15px); }
+            100% { opacity: 0.7; filter: blur(20px); }
+        }
+        
+        .location-button {
+            --glow-color: #ff5e57;
+            background: linear-gradient(135deg, 
+                rgba(255, 94, 87, 0.7), 
+                rgba(255, 56, 56, 0.7));
+        }
+        
+        .location-button .btn-glow {
+            background: linear-gradient(135deg, 
+                rgba(255, 94, 87, 0.8), 
+                rgba(255, 56, 56, 0.4));
+            animation: locationGlow 3s infinite alternate;
+        }
+        
+        @keyframes locationGlow {
+            0% { opacity: 0.3; filter: blur(15px); }
+            100% { opacity: 0.7; filter: blur(20px); }
+        }
+        
+        .countdown {
+            font-size: clamp(16px, 3vw, 18px);
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        /* New Modern Music Player Styles */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            left: 10%;
+            width: 80%;
+            height: 20%;
+            background: var(--player-bg);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            padding: 12px;
+            z-index: 1000;
+            border-radius: 15px;
+            transition: all 0.3s ease-out;
+            transform: none;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .music-player.expanded {
+            transform: none;
+        }
+        
+        .music-player.mini-mode {
+            width: 60px;
+            height: 60px;
+            left: auto;
+            right: 20px;
+            border-radius: 50%;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .music-player.mini-mode .player-content {
+            display: none;
+        }
+        
+        .music-player.mini-mode .toggle-mini-btn {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--player-highlight);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 22px;
+            color: white;
+        }
+        
+        .player-handle {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .player-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: calc(5% - 10px);
+            margin-bottom: 5px;
+            flex-shrink: 0;
+        }
+        
+        .player-btn {
+            background: rgba(30, 30, 40, 0.6);
+            border: none;
+            color: var(--player-text);
+            font-size: 18px;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transform: perspective(1000px) translateZ(0);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, 0.2),
+                0 1px 3px rgba(255, 255, 255, 0.1) inset;
+        }
+        
+        .player-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            opacity: 0;
+            z-index: -1;
+            box-shadow: 0 0 8px 2px rgba(155, 89, 182, 0.7);
+            transition: opacity 0.3s ease;
+        }
+        
+        .player-btn:hover {
+            background: rgba(50, 50, 70, 0.7);
+            transform: perspective(1000px) translateZ(5px) scale(1.1);
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, 0.3),
+                0 2px 5px rgba(255, 255, 255, 0.15) inset;
+        }
+        
+        .player-btn:hover::after {
+            opacity: 1;
+        }
+        
+        .player-btn:active {
+            transform: perspective(1000px) translateZ(-2px) scale(0.95);
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+        
+        .player-btn.play-pause {
+            background: var(--player-highlight);
+            color: white;
+            font-size: 20px;
+            width: 45px;
+            height: 45px;
+            position: relative;
+            overflow: visible;
+        }
+        
+        .player-btn.play-pause::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            background: transparent;
+            border: 2px solid rgba(155, 89, 182, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        
+        .player-btn.play-pause:hover {
+            background: linear-gradient(135deg, var(--player-highlight), #8e44ad);
+            box-shadow: 
+                0 0 15px rgba(155, 89, 182, 0.5),
+                0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .player-btn.play-pause:hover::before {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        .progress-container {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 5px 0;
+            cursor: pointer;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .progress-bar {
+            height: 0;
+            width: 0;
+            background: linear-gradient(90deg, var(--player-highlight), #8e44ad);
+            border-radius: 10px;
+            transition: width 0.1s linear;
+        }
+        
+        .song-info {
+            text-align: center;
+            margin-bottom: 5px;
+            color: var(--player-text);
+            flex-shrink: 0;
+        }
+        
+        .song-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .song-artist {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .time-info {
+            display: flex;
+            justify-content: space-between;
+            color: var(--player-text);
+            font-size: 12px;
+            padding: 0 5px;
+            flex-shrink: 0;
+        }
+        
+        .playlist-container {
+            flex: 1;
+            overflow-y: auto;
+            margin-top: 5px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 5px;
+            direction: ltr; /* For song titles that might be in English */
+            min-height: 0; /* Ensures the flex item can shrink below content size */
+        }
+        
+        .playlist-item {
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-bottom: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            text-align: left;
+        }
+        
+        .playlist-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .playlist-item.active {
+            background: rgba(155, 89, 182, 0.3);
+            color: white;
+        }
+        
+        .playlist-item .song-num {
+            width: 25px;
+            margin-right: 10px;
+            font-weight: bold;
+            color: var(--player-highlight);
+        }
+        
+        .playlist-item .song-name {
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .playlist-item .song-duration {
+            margin-left: 10px;
+            opacity: 0.7;
+            font-size: 12px;
+        }
+        
+        /* Ensure the player works well on mobile */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px 10px;
+                padding-bottom: 25%; /* Make room for player on mobile */
+            }
+            
+            .music-player {
+                bottom: 10px;
+                left: 5%;
+                width: 90%;
+                height: 25%;
+            }
+            
+            .player-controls {
+                gap: 10px;
+            }
+            
+            .player-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+            
+            .player-btn.play-pause {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .song-title {
+                font-size: 16px;
+            }
+            
+            .song-artist {
+                font-size: 12px;
+            }
+            
+            .visualizer-container {
+                height: 20px;
+                margin: 2px 0;
+            }
+        }
+        
+        /* Volume control */
+        .volume-container {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            gap: 10px;
+            color: var(--player-text);
+            flex-shrink: 0;
+        }
+        
+        .volume-slider {
+            flex: 1;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .volume-progress {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, var(--player-highlight), #8e44ad);
+            border-radius: 10px;
+        }
+        
+        /* Visual audio equalizer effect */
+        .visualizer-container {
+            height: 30px;
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            flex-shrink: 0;
+        }
+        
+        .visualizer-bar {
+            background: var(--player-highlight);
+            width: 4px;
+            height: 5px;
+            border-radius: 2px;
+            animation: equalize 1s infinite;
+        }
+        
+        @keyframes equalize {
+            0% { height: 5px; }
+            50% { height: 20px; }
+            100% { height: 5px; }
+        }
+        
+        /* Custom styling for the bars to create a realistic effect */
+        .visualizer-bar:nth-child(1) { animation-delay: 0.0s; }
+        .visualizer-bar:nth-child(2) { animation-delay: 0.1s; }
+        .visualizer-bar:nth-child(3) { animation-delay: 0.2s; }
+        .visualizer-bar:nth-child(4) { animation-delay: 0.1s; }
+        .visualizer-bar:nth-child(5) { animation-delay: 0.3s; }
+        .visualizer-bar:nth-child(6) { animation-delay: 0.0s; }
+        .visualizer-bar:nth-child(7) { animation-delay: 0.2s; }
+        .visualizer-bar:nth-child(8) { animation-delay: 0.1s; }
+        .visualizer-bar:nth-child(9) { animation-delay: 0.3s; }
+        .visualizer-bar:nth-child(10) { animation-delay: 0.1s; }
+        .visualizer-bar:nth-child(11) { animation-delay: 0.0s; }
+        .visualizer-bar:nth-child(12) { animation-delay: 0.2s; }
+        
+        /* Play/pause button pulse animation */
+        .player-btn.play-pause {
+            position: relative;
+        }
+        
+        .player-btn.play-pause::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--player-highlight);
+            z-index: -1;
+            opacity: 0.6;
+            animation: pulse 2s infinite;
+            display: none; /* Hidden by default, shown when playing */
+        }
+        
+        .playing .player-btn.play-pause::after {
+            display: block;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.6; }
+            70% { transform: scale(1.4); opacity: 0; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+        
+        /* Tooltip for buttons */
+        .player-btn {
+            position: relative;
+        }
+        
+        .player-btn:hover::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            animation: fadeIn 0.3s forwards;
+        }
+        
+        /* Modern scrollbar for playlist */
+        .playlist-container::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .playlist-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05); 
+            border-radius: 10px;
+        }
+        
+        .playlist-container::-webkit-scrollbar-thumb {
+            background: rgba(155, 89, 182, 0.5); 
+            border-radius: 10px;
+        }
+        
+        .playlist-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(155, 89, 182, 0.8); 
+        }
+        
+        .toggle-mini-btn {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--player-text);
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
+            z-index: 1;
+            transition: all 0.2s;
+        }
+        
+        .toggle-mini-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .player-handle {
+            display: none;
+        }
+        
+        .player-content {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        @media (min-width: 1200px) {
+            .music-player {
+                max-width: 1000px;
+                left: calc(50% - 500px);
+            }
+            
+            .player-controls {
+                gap: 30px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .music-player {
+                max-width: 80%;
+                left: 10%;
+            }
+            
+            .player-controls {
+                gap: 30px;
+            }
+        }
+
+        /* Add special handling for small-height screens */
+        @media (max-height: 600px) {
+            .music-player {
+                height: 25%;
+            }
+            
+            .visualizer-container {
+                display: none;
+            }
+            
+            .player-controls {
+                margin-bottom: 3px;
+            }
+            
+            .song-info {
+                margin-bottom: 3px;
+            }
+        }
+        
+        /* Intro Animation Styles */
+        .intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+        
+        .intro-content {
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+        }
+        
+        .intro-title {
+            font-size: clamp(32px, 8vw, 60px);
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeUpIn 1s forwards 0.5s;
+            text-shadow: 0 0 10px rgba(255, 204, 41, 0.7);
+        }
+        
+        .intro-subtitle {
+            font-size: clamp(20px, 4vw, 30px);
+            color: var(--light-color);
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUpIn 1s forwards 1s;
+        }
+        
+        .intro-decoration {
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            margin: 20px auto;
+            opacity: 0;
+            animation: expandWidth 1.5s forwards 1.5s;
+        }
+        
+        .intro-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .heart {
+            position: absolute;
+            color: var(--secondary-color);
+            font-size: 20px;
+            animation: floatHeart 6s linear infinite;
+            opacity: 0;
+        }
+        
+        .heart:nth-child(2n) {
+            color: var(--primary-color);
+        }
+        
+        .heart:nth-child(3n) {
+            color: var(--player-highlight);
+        }
+        
+        .intro-date {
+            font-size: clamp(18px, 3vw, 24px);
+            color: var(--light-color);
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeIn 1s forwards 2s;
+        }
+        
+        .intro-skip {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light-color);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Noto Nastaliq Urdu', serif;
+            transition: all 0.3s;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards 2.5s;
+        }
+        
+        .intro-skip:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .intro-loader {
+            position: absolute;
+            bottom: 100px;
+            width: 150px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards 2.5s;
+        }
+        
+        .intro-loader-progress {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+            animation: loadProgress 3.5s linear forwards 2.5s;
+        }
+        
+        @keyframes fadeUpIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes expandWidth {
+            from {
+                width: 0;
+                opacity: 0;
+            }
+            to {
+                width: 80%;
+                opacity: 1;
+            }
+        }
+        
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-20vh) scale(1.5) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes loadProgress {
+            from {
+                width: 0%;
+            }
+            to {
+                width: 100%;
+            }
+        }
+        
+        .body-no-scroll {
+            overflow: hidden;
+        }
+        
+        /* Watermark styles */
+        .watermark {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            font-family: Arial, sans-serif;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 4px 10px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            transition: opacity 0.3s ease;
+        }
+        
+        .watermark:hover {
+            color: rgba(248, 243, 243, 0.8);
+        }
+        
+        /* Adjust watermark position when music player is visible */
+        @media (max-height: 700px) {
+            .watermark {
+                bottom: 80px;
+            }
+        }
+
+        /* 3D Slideshow Styles */
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            margin: 40px auto;
+            perspective: 1200px;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease-out;
+        }
+
+        /* Add glare effect */
+        .slideshow-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.2) 0%, 
+                rgba(255, 255, 255, 0) 60%);
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: inherit;
+            pointer-events: none;
+        }
+
+        .slideshow-container:hover::before {
+            opacity: 1;
+        }
+
+        /* Loading progress bar */
+        .slide-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), #ff5e57);
+            z-index: 15;
+            transition: width 0.1s linear;
+            border-radius: 0 3px 3px 0;
+            box-shadow: 0 0 10px rgba(255, 204, 41, 0.7);
+        }
+
+        /* New transition effect classes */
+        .slide-effect-blur .slide.active {
+            animation: blurEffect 1.5s forwards;
+        }
+
+        .slide-effect-swing .slide.active {
+            animation: swingEffect 1.5s forwards;
+        }
+
+        .slide-effect-bounce .slide.active {
+            animation: bounceEffect 1.5s forwards;
+        }
+
+        @keyframes blurEffect {
+            0% { filter: blur(20px); opacity: 0; transform: scale(1.1) translateZ(0); }
+            100% { filter: blur(0); opacity: 1; transform: scale(1) translateZ(0); }
+        }
+
+        @keyframes swingEffect {
+            0% { transform: translateZ(0) rotateY(-30deg); opacity: 0; }
+            40% { transform: translateZ(0) rotateY(15deg); opacity: 1; }
+            60% { transform: translateZ(0) rotateY(-10deg); opacity: 1; }
+            80% { transform: translateZ(0) rotateY(5deg); opacity: 1; }
+            100% { transform: translateZ(0) rotateY(0); opacity: 1; }
+        }
+
+        @keyframes bounceEffect {
+            0% { transform: translateZ(-100px); opacity: 0; }
+            50% { transform: translateZ(30px); opacity: 0.8; }
+            75% { transform: translateZ(-15px); opacity: 0.9; }
+            100% { transform: translateZ(0); opacity: 1; }
+        }
+
+        /* Enhanced slide indicator dots */
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .dot::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .dot:hover::before {
+            opacity: 1;
+        }
+
+        /* 3D effect for controls */
+        .slideshow-controls {
+            transform-style: preserve-3d;
+            transform: translateZ(25px);
+        }
+
+        /* Add shadow to caption */
+        .slide-caption {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Add reflection effect */
+        .slide::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.1));
+            z-index: 1;
+            transform: rotateX(180deg) translateY(100%);
+            opacity: 0.3;
+            filter: blur(3px);
+            pointer-events: none;
+        }
+
+        .slideshow-loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 11;
+            color: white;
+            font-size: 20px;
+            border-radius: inherit;
+        }
+
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s infinite ease;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .slides {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 1s ease;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transform: translateZ(-1000px) rotateY(30deg);
+            background-size: cover;
+            background-position: center;
+            transition: 
+                opacity 1.2s ease, 
+                transform 1.2s ease,
+                filter 1.2s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+            filter: brightness(0.7);
+            border-radius: inherit;
+            transform-style: preserve-3d;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateZ(0) rotateY(0);
+            z-index: 10;
+            filter: brightness(1);
+        }
+
+        .slide.prev {
+            opacity: 0.7;
+            transform: translateZ(-200px) translateX(-100px) rotateY(10deg);
+            z-index: 9;
+            filter: brightness(0.6);
+        }
+
+        .slide.next {
+            opacity: 0.7;
+            transform: translateZ(-200px) translateX(100px) rotateY(-10deg);
+            z-index: 9;
+            filter: brightness(0.6);
+        }
+
+        /* New transition effects */
+        .slide-effect-fade .slide.active {
+            animation: fadeIn 1.5s forwards;
+        }
+
+        .slide-effect-zoom .slide.active {
+            animation: zoomEffect 1.5s forwards;
+        }
+
+        .slide-effect-slide .slide.active {
+            animation: slideEffect 1.5s forwards;
+        }
+
+        .slide-effect-flip .slide.active {
+            animation: flipEffect 1.5s forwards;
+        }
+
+        .slide-effect-cube .slide.active {
+            animation: cubeEffect 1.5s forwards;
+        }
+
+        .slide-effect-reveal .slide.active {
+            animation: revealEffect 1.5s forwards;
+        }
+
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes zoomEffect {
+            from { transform: scale(1.3) translateZ(0) rotateY(0); opacity: 0; }
+            to { transform: scale(1) translateZ(0) rotateY(0); opacity: 1; }
+        }
+
+        @keyframes slideEffect {
+            from { transform: translateX(100%) translateZ(0) rotateY(0); opacity: 0; }
+            to { transform: translateX(0) translateZ(0) rotateY(0); opacity: 1; }
+        }
+
+        @keyframes flipEffect {
+            from { transform: rotateY(90deg) translateZ(0); opacity: 0; }
+            to { transform: rotateY(0) translateZ(0); opacity: 1; }
+        }
+
+        @keyframes cubeEffect {
+            0% { transform: translateZ(-100px) rotateY(90deg); opacity: 0; }
+            50% { transform: translateZ(50px) rotateY(45deg); opacity: 0.5; }
+            100% { transform: translateZ(0) rotateY(0); opacity: 1; }
+        }
+
+        @keyframes revealEffect {
+            0% { clip-path: inset(0 100% 0 0); opacity: 1; }
+            100% { clip-path: inset(0 0 0 0); opacity: 1; }
+        }
+
+        /* Parallax motion effect */
+        .slideshow-container:hover .slide.active {
+            transform: translateZ(10px) scale(1.02);
+            transition: transform 0.4s ease-out;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                rgba(0, 0, 0, 0.4) 0%, 
+                rgba(0, 0, 0, 0.2) 20%,
+                rgba(0, 0, 0, 0) 40%,
+                rgba(0, 0, 0, 0) 60%,
+                rgba(0, 0, 0, 0.2) 80%,
+                rgba(0, 0, 0, 0.4) 100%);
+            z-index: 1;
+        }
+
+        .slide-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            padding: 20px;
+            z-index: 2;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.8s ease 0.3s;
+        }
+
+        .slide.active .slide-caption {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .slide-caption h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .slide-caption p {
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .slideshow-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            z-index: 10;
+            gap: 10px;
+        }
+
+        .slideshow-dots {
+            display: flex;
+            gap: 8px;
+            margin: 0 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dot::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-color);
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .dot.active::after {
+            transform: scale(1);
+        }
+
+        .dot.active {
+            transform: scale(1.2);
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .slideshow-nav-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.4);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            opacity: 0.7;
+            transform: translateZ(20px);
+        }
+
+        .slideshow-container:hover .slideshow-nav-btn {
+            opacity: 1;
+        }
+
+        .slideshow-nav-btn:hover {
+            background: rgba(255, 204, 41, 0.6);
+            transform: translateZ(20px) scale(1.1);
+        }
+
+        .pause-btn {
+            background: rgba(0, 0, 0, 0.4);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            opacity: 0.7;
+            transform: translateZ(20px);
+        }
+
+        .pause-btn:hover {
+            background: rgba(255, 204, 41, 0.6);
+            opacity: 1;
+            transform: translateZ(20px) scale(1.1);
+        }
+
+        .slide-counter {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transform: translateZ(15px);
+        }
+
+        /* Geometric decoration elements */
+        .slideshow-container::after {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 80px;
+            height: 80px;
+            background: var(--primary-color);
+            opacity: 0.2;
+            border-radius: 50%;
+            filter: blur(20px);
+            z-index: -1;
+            animation: float 6s infinite alternate ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-20px) scale(1.1); }
+        }
+
+        /* Better responsiveness */
+        @media (max-width: 768px) {
+            .slideshow-container {
+                height: 300px;
+                max-width: 90%;
+                perspective: 800px;
+            }
+
+            .slide-caption h3 {
+                font-size: 20px;
+            }
+
+            .slide-caption p {
+                font-size: 14px;
+            }
+            
+            .slideshow-controls {
+                bottom: 15px;
+            }
+            
+            .slideshow-nav-btn, .pause-btn {
+                width: 36px;
+                height: 36px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slideshow-container {
+                height: 250px;
+                border-radius: 8px;
+            }
+
+            .slideshow-nav-btn, .pause-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+            }
+
+            .dot {
+                width: 8px;
+                height: 8px;
+            }
+            
+            .slide-counter {
+                top: 10px;
+                right: 10px;
+                font-size: 12px;
+                padding: 3px 8px;
+            }
+            
+            .slide.prev {
+                transform: translateZ(-100px) translateX(-60px) rotateY(10deg);
+            }
+
+            .slide.next {
+                transform: translateZ(-100px) translateX(60px) rotateY(-10deg);
+            }
+        }
+
+        /* Extra small devices */
+        @media (max-width: 360px) {
+            .slideshow-container {
+                height: 200px;
+            }
+            
+            .slide-caption h3 {
+                font-size: 16px;
+            }
+            
+            .slideshow-dots {
+                gap: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Intro Animation Overlay -->
+    <div class="intro-overlay" id="introOverlay">
+        <div class="intro-hearts" id="introHearts"></div>
+        <div class="intro-content">
+            <h1 class="intro-title">شادی کا دعوت</h1>
+            <div class="intro-decoration"></div>
+            <h2 class="intro-subtitle">انجینئر آدم خان ولد حاجی ہارون خان</h2>
+            <p class="intro-date">5 اپریل 2025</p>
+        </div>
+        <div class="intro-loader">
+            <div class="intro-loader-progress"></div>
+        </div>
+        <button class="intro-skip" id="introSkip">چھوڑ دیں</button>
+    </div>
+    
+    <div class="fireworks-container" id="fireworks"></div>
+    
+    <div class="card animate__animated animate__fadeIn">
+        <h1 class="animate__animated animate__fadeInDown">انجینئر آدم خان ولد حاجی ہارون خان</h1>
+        <p class="details animate__animated animate__fadeIn animate__delay-1s">خوشیوں کے اس خوبصورت موقع پر آپ کی آمد ہمارے لیے سب سے قیمتی تحفہ ہوگی!" 🎊💖
+
+        </p>
+        <p class="details animate__animated animate__fadeIn animate__delay-1s"><strong>شادی کی تاریخ:</strong> 5 اپریل 2025</p>
+        <p class="details animate__animated animate__fadeIn animate__delay-1s"><strong>وقت:</strong>9:00 AM سے 1:00 PM تک" ⏰</p>
+        <p class="details animate__animated animate__fadeIn animate__delay-1s"><strong>مقام:</strong> سوگیا کلی، تحصیل تنگی، ضلع چارسدہ</p>
+        <p class="countdown animate__animated animate__fadeIn animate__delay-2s" id="countdown"></p>
+        <div class="button-container animate__animated animate__fadeIn animate__delay-2s">
+            <a class="btn whatsapp-button" id="whatsappLink" target="_blank" style="width: 48%;">
+                <div class="btn-glow"></div>
+                <i class="fab fa-whatsapp"></i>
+                <span>واٹس ایپ</span>
+            </a>
+            <a class="btn location-button" href="https://www.google.com/maps/search/?api=1&query=34.2925,71.6619" target="_blank" style="width: 48%;">
+                <div class="btn-glow"></div>
+                <i class="fas fa-map-marker-alt"></i>
+                <span>مقام دیکھیں</span>
+            </a>
+        </div>
+        
+        <!-- Add the 3D slideshow after the buttons -->
+        <div class="slideshow-container" id="weddingSlideshow">
+            <div class="slideshow-loader" id="slideshowLoader">
+                <div class="loader-spinner"></div>
+            </div>
+            <div class="slides" id="slides"></div>
+            <div class="slide-counter" id="slideCounter">1/0</div>
+            <div class="slideshow-controls">
+                <button class="slideshow-nav-btn prev-btn" id="prevSlide">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="slideshow-dots" id="slideshowDots"></div>
+                <button class="pause-btn" id="pauseBtn">
+                    <i class="fas fa-pause" id="pauseIcon"></i>
+                </button>
+                <button class="slideshow-nav-btn next-btn" id="nextSlide">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modern Music Player -->
+    <div class="music-player" id="musicPlayer">
+        <div class="toggle-mini-btn" id="toggleMiniBtn"><i class="fas fa-compress"></i></div>
+        <div class="player-content">
+            <div class="player-handle" id="playerHandle"></div>
+            
+            <div class="song-info">
+                <div class="song-title" id="songTitle">آدم خان</div>
+                <div class="song-artist" id="songArtist">شادی کی خوشی</div>
+                
+                <!-- Visual audio equalizer -->
+                <div class="visualizer-container" id="visualizer">
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                </div>
+            </div>
+            
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            
+            <div class="time-info">
+                <span id="currentTime">0:00</span>
+                <span id="totalTime">0:00</span>
+            </div>
+            
+            <div class="player-controls">
+                <button class="player-btn" id="prevBtn" data-tooltip="سابقہ گانا">
+                    <i class="fas fa-step-backward"></i>
+                </button>
+                <button class="player-btn" id="backwardBtn" data-tooltip="10 سیکنڈ پیچھے">
+                    <i class="fas fa-backward"></i>
+                </button>
+                <button class="player-btn play-pause" id="playPauseBtn">
+                    <i class="fas fa-play" id="playPauseIcon"></i>
+                </button>
+                <button class="player-btn" id="forwardBtn" data-tooltip="10 سیکنڈ آگے">
+                    <i class="fas fa-forward"></i>
+                </button>
+                <button class="player-btn" id="nextBtn" data-tooltip="اگلا گانا">
+                    <i class="fas fa-step-forward"></i>
+                </button>
+            </div>
+            
+            <div class="volume-container">
+                <i class="fas fa-volume-down" id="volumeIcon"></i>
+                <div class="volume-slider" id="volumeSlider">
+                    <div class="volume-progress" id="volumeProgress"></div>
+                </div>
+            </div>
+            
+            <div class="playlist-container" id="playlist">
+                <!-- Playlist items will be added dynamically -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Intro Animation
+            const introOverlay = document.getElementById('introOverlay');
+            const introSkip = document.getElementById('introSkip');
+            const introHearts = document.getElementById('introHearts');
+            const hasSeenIntro = localStorage.getItem('hasSeenIntro');
+            
+            // Create floating hearts
+            function createHearts() {
+                for (let i = 0; i < 15; i++) {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.innerHTML = '♥';
+                    heart.style.left = `${Math.random() * 100}%`;
+                    heart.style.animationDelay = `${Math.random() * 5}s`;
+                    heart.style.fontSize = `${Math.random() * 15 + 15}px`;
+                    introHearts.appendChild(heart);
+                }
+            }
+            
+            // Function to hide intro
+            function hideIntro() {
+                document.body.classList.remove('body-no-scroll');
+                introOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    introOverlay.style.display = 'none';
+                    // Start fireworks after intro
+                    const fireworks = new Fireworks.default(container, { 
+                        autoresize: true, 
+                        opacity: 0.7, 
+                        particles: 200, 
+                        explosion: 5, 
+                        intensity: 80,
+                        traceSpeed: 3,
+                        rocketsPoint: {
+                            min: 0,
+                            max: 100
+                        }
+                    });
+                    fireworks.start();
+                }, 500);
+                
+                // Set localStorage to remember the user has seen the intro
+                localStorage.setItem('hasSeenIntro', 'true');
+            }
+            
+            // Handle intro display
+            if (hasSeenIntro) {
+                // User has seen intro before, skip it
+                introOverlay.style.display = 'none';
+                
+                // Start fireworks immediately
+                const container = document.getElementById("fireworks");
+                const fireworks = new Fireworks.default(container, { 
+                    autoresize: true, 
+                    opacity: 0.7, 
+                    particles: 200, 
+                    explosion: 5, 
+                    intensity: 80,
+                    traceSpeed: 3,
+                    rocketsPoint: {
+                        min: 0,
+                        max: 100
+                    }
+                });
+                fireworks.start();
+            } else {
+                // First visit, show intro
+                document.body.classList.add('body-no-scroll');
+                createHearts();
+                
+                // Skip button event
+                introSkip.addEventListener('click', hideIntro);
+                
+                // Auto skip after animation completes
+                setTimeout(hideIntro, 6000);
+                
+                // Delay fireworks until after intro
+                const container = document.getElementById("fireworks");
+            }
+            
+            // Music Player Implementation
+            const musicPlayer = document.getElementById('musicPlayer');
+            const playerHandle = document.getElementById('playerHandle');
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const playPauseIcon = document.getElementById('playPauseIcon');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const backwardBtn = document.getElementById('backwardBtn');
+            const forwardBtn = document.getElementById('forwardBtn');
+            const songTitle = document.getElementById('songTitle');
+            const songArtist = document.getElementById('songArtist');
+            const progressContainer = document.getElementById('progressContainer');
+            const progressBar = document.getElementById('progressBar');
+            const currentTime = document.getElementById('currentTime');
+            const totalTime = document.getElementById('totalTime');
+            const volumeSlider = document.getElementById('volumeSlider');
+            const volumeProgress = document.getElementById('volumeProgress');
+            const volumeIcon = document.getElementById('volumeIcon');
+            const playlist = document.getElementById('playlist');
+            
+            // Music list using actual MP3 files in the directory
+            const songs = [
+                { title: "شادی کا گیت ١", artist: "شادی کی خوشی", src: "song/shadi song (1).mp3", duration: "Unknown" },
+                { title: "شادی کا گیت ٢", artist: "شادی کی خوشی", src: "song/shadi song (2).mp3", duration: "Unknown" },
+                { title: "شادی کا گیت ٣", artist: "شادی کی خوشی", src: "song/shadi song (3).mp3", duration: "Unknown" },
+                { title: "شادی کا گیت ٤", artist: "شادی کی خوشی", src: "song/shadi song (4).mp3", duration: "Unknown" },
+                { title: "شادی کا گیت ٥", artist: "شادی کی خوشی", src: "song/shadi song (5).mp3", duration: "Unknown" },
+                { title: "شادی کا گیت ٦", artist: "شادی کی خوشی", src: "song/shadi song (6).mp3", duration: "Unknown" },
+                { title: "شادی کا گیت ٧", artist: "شادی کی خوشی", src: "song/shadi song (7).mp3", duration: "Unknown" },
+                { title: "شادی کا گیت ٨", artist: "شادی کی خوشی", src: "song/shadi song (8).mp3", duration: "Unknown" },
+                { title: "شادی کا گیت ٩", artist: "شادی کی خوشی", src: "song/shadi song (9).mp3", duration: "Unknown" },
+                { title: "شادی کا گیت ١٠", artist: "شادی کی خوشی", src: "song/shadi song (10).mp3", duration: "Unknown" },
+                { title: "شادی کا گیت ١١", artist: "شادی کی خوشی", src: "song/shadi song (11).mp3", duration: "Unknown" },
+                { title: "شادی کا گیت ١٢", artist: "شادی کی خوشی", src: "song/shadi song (12).mp3", duration: "Unknown" },
+                { title: "شادی کا گیت ١٣", artist: "شادی کی خوشی", src: "song/shadi song (13).mp3", duration: "Unknown" }
+            ];
+            
+            // Create audio element with improved error handling
+            const audio = new Audio();
+            audio.preload = "auto";
+            
+            // Add error handling for audio element
+            audio.addEventListener('error', function(e) {
+                console.error('Audio error:', e);
+                // Try to recover by moving to next song
+                setTimeout(() => {
+                    nextSong();
+                }, 2000);
+            });
+            
+            // Add canplaythrough event to ensure audio is ready
+            audio.addEventListener('canplaythrough', function() {
+                console.log('Audio is ready to play');
+                // Update duration if available
+                if (!isNaN(audio.duration)) {
+                    const durationMin = Math.floor(audio.duration / 60);
+                    const durationSec = Math.floor(audio.duration % 60);
+                    const formattedDuration = `${durationMin}:${durationSec < 10 ? '0' : ''}${durationSec}`;
+                    songs[currentSongIndex].duration = formattedDuration;
+                    totalTime.textContent = formattedDuration;
+                }
+            });
+            
+            let currentSongIndex = 0;
+            let isPlaying = false;
+            let volume = 1.0;
+            
+            // Generate playlist HTML
+            function generatePlaylist() {
+                playlist.innerHTML = '';
+                songs.forEach((song, index) => {
+                    const item = document.createElement('div');
+                    item.classList.add('playlist-item');
+                    if (index === currentSongIndex) {
+                        item.classList.add('active');
+                    }
+                    
+                    item.innerHTML = `
+                        <div class="song-num">${index + 1}</div>
+                        <div class="song-name">${song.title}</div>
+                        <div class="song-duration">${song.duration}</div>
+                    `;
+                    
+                    item.addEventListener('click', () => {
+                        currentSongIndex = index;
+                        loadSong();
+                        playSong();
+                    });
+                    
+                    playlist.appendChild(item);
+                });
+            }
+            
+            // Update playlist highlight
+            function updatePlaylistHighlight() {
+                const items = playlist.querySelectorAll('.playlist-item');
+                items.forEach((item, index) => {
+                    if (index === currentSongIndex) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Load song with improved error handling
+            function loadSong() {
+                const song = songs[currentSongIndex];
+                songTitle.textContent = song.title;
+                songArtist.textContent = song.artist;
+                
+                // Reset audio source
+                audio.src = '';
+                audio.load();
+                
+                // Set new source with error handling
+                try {
+                    audio.src = song.src;
+                    audio.load();
+                    updatePlaylistHighlight();
+                } catch (error) {
+                    console.error('Error loading song:', error);
+                    // Try to recover by moving to next song
+                    setTimeout(() => {
+                        nextSong();
+                    }, 2000);
+                }
+            }
+            
+            // Play song with improved error handling
+            function playSong() {
+                // If in mini mode, expand to show controls when playing
+                if (musicPlayer.classList.contains('mini-mode')) {
+                    toggleMiniMode();
+                }
+                
+                // Check if file exists before trying to play
+                const songSrc = songs[currentSongIndex].src;
+                
+                // Add error handling for audio loading
+                audio.onerror = function() {
+                    console.error(`Error loading audio file: ${songSrc}`);
+                    alert(`آڈیو فائل لوڈ کرنے میں دشواری: ${songSrc}`);
+                    
+                    // Try to recover by moving to next song
+                    setTimeout(() => {
+                        nextSong();
+                    }, 2000);
+                    return;
+                };
+                
+                // Try to play with error handling
+                const playPromise = audio.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        isPlaying = true;
+                        playPauseIcon.classList.remove('fa-play');
+                        playPauseIcon.classList.add('fa-pause');
+                        toggleVisualizer(true);
+                    }).catch(e => {
+                        console.error("Audio playback failed:", e);
+                        
+                        // More specific error messages based on error type
+                        if (e.name === 'NotAllowedError') {
+                            // Handle autoplay restrictions
+                            alert("آٹوپلے کی اجازت نہیں ہے - موسیقی چلانے کے لیے براہ کرم پلے بٹن پر کلک کریں");
+                        } else if (e.name === 'NotSupportedError') {
+                            alert("آڈیو فارمیٹ سپورٹ نہیں ہے");
+                        } else {
+                            alert("موسیقی چلانے میں دشواری - دوبارہ کوشش کریں");
+                        }
+                    });
+                }
+            }
+            
+            // Pause song
+            function pauseSong() {
+                audio.pause();
+                isPlaying = false;
+                playPauseIcon.classList.remove('fa-pause');
+                playPauseIcon.classList.add('fa-play');
+            }
+            
+            // Previous song
+            function prevSong() {
+                currentSongIndex--;
+                if (currentSongIndex < 0) {
+                    currentSongIndex = songs.length - 1;
+                }
+                loadSong();
+                playSong();
+            }
+            
+            // Next song
+            function nextSong() {
+                currentSongIndex++;
+                if (currentSongIndex > songs.length - 1) {
+                    currentSongIndex = 0;
+                }
+                loadSong();
+                playSong();
+            }
+            
+            // Forward 10 seconds
+            function forwardTenSeconds() {
+                audio.currentTime += 10;
+            }
+            
+            // Backward 10 seconds
+            function backwardTenSeconds() {
+                audio.currentTime -= 10;
+            }
+            
+            // Update progress bar
+            function updateProgress(e) {
+                const { duration, currentTime: audioCurrTime } = e.target;
+                const progressPercent = (audioCurrTime / duration) * 100;
+                progressBar.style.width = `${progressPercent}%`;
+                
+                // Format time display
+                const currMin = Math.floor(audioCurrTime / 60);
+                const currSec = Math.floor(audioCurrTime % 60);
+                const durationMin = Math.floor(duration / 60) || 0;
+                const durationSec = Math.floor(duration % 60) || 0;
+                
+                currentTime.textContent = `${currMin}:${currSec < 10 ? '0' : ''}${currSec}`;
+                if (!isNaN(duration)) {
+                    totalTime.textContent = `${durationMin}:${durationSec < 10 ? '0' : ''}${durationSec}`;
+                    
+                    // Update the song duration in the songs array and playlist
+                    const formattedDuration = `${durationMin}:${durationSec < 10 ? '0' : ''}${durationSec}`;
+                    songs[currentSongIndex].duration = formattedDuration;
+                    
+                    // Update duration in playlist if available
+                    const playlistItems = document.querySelectorAll('.playlist-item');
+                    if (playlistItems[currentSongIndex]) {
+                        const durationEl = playlistItems[currentSongIndex].querySelector('.song-duration');
+                        if (durationEl) {
+                            durationEl.textContent = formattedDuration;
+                        }
+                    }
+                }
+            }
+            
+            // Set progress when clicked
+            function setProgress(e) {
+                const width = this.clientWidth;
+                const clickX = e.offsetX;
+                const duration = audio.duration;
+                audio.currentTime = (clickX / width) * duration;
+            }
+            
+            // Set volume
+            function setVolume(e) {
+                const width = volumeSlider.clientWidth;
+                const clickX = e.offsetX;
+                volume = clickX / width;
+                
+                // Constrain between 0 and 1
+                volume = Math.max(0, Math.min(1, volume));
+                
+                // Update volume bar and audio
+                volumeProgress.style.width = `${volume * 100}%`;
+                audio.volume = volume;
+                
+                // Update volume icon
+                updateVolumeIcon();
+            }
+            
+            // Update volume icon based on level
+            function updateVolumeIcon() {
+                volumeIcon.className = 'fas';
+                
+                if (volume > 0.7) {
+                    volumeIcon.classList.add('fa-volume-up');
+                } else if (volume > 0.1) {
+                    volumeIcon.classList.add('fa-volume-down');
+                } else {
+                    volumeIcon.classList.add('fa-volume-mute');
+                }
+            }
+            
+            // Toggle player expanded state
+            function togglePlayerExpanded() {
+                musicPlayer.classList.toggle('expanded');
+            }
+            
+            // Toggle between full and mini mode for the player
+            function toggleMiniMode() {
+                musicPlayer.classList.toggle('mini-mode');
+                const icon = document.getElementById('toggleMiniBtn').querySelector('i');
+                
+                if (musicPlayer.classList.contains('mini-mode')) {
+                    icon.className = 'fas fa-music';
+                } else {
+                    icon.className = 'fas fa-compress';
+                }
+            }
+            
+            // Event listeners
+            playPauseBtn.addEventListener('click', () => {
+                if (isPlaying) {
+                    pauseSong();
+                } else {
+                    playSong();
+                }
+            });
+            
+            prevBtn.addEventListener('click', prevSong);
+            nextBtn.addEventListener('click', nextSong);
+            forwardBtn.addEventListener('click', forwardTenSeconds);
+            backwardBtn.addEventListener('click', backwardTenSeconds);
+            
+            audio.addEventListener('timeupdate', updateProgress);
+            audio.addEventListener('ended', nextSong);
+            
+            progressContainer.addEventListener('click', setProgress);
+            volumeSlider.addEventListener('click', setVolume);
+            playerHandle.addEventListener('click', togglePlayerExpanded);
+            
+            // Volume icon click to mute/unmute
+            volumeIcon.addEventListener('click', () => {
+                if (audio.volume > 0) {
+                    // Store the previous volume to restore later
+                    volumeIcon.dataset.prevVolume = audio.volume;
+                    audio.volume = 0;
+                    volumeProgress.style.width = '0%';
+                    volumeIcon.className = 'fas fa-volume-mute';
+                } else {
+                    // Restore previous volume or set to 0.5
+                    const prevVolume = parseFloat(volumeIcon.dataset.prevVolume) || 0.5;
+                    audio.volume = prevVolume;
+                    volume = prevVolume;
+                    volumeProgress.style.width = `${prevVolume * 100}%`;
+                    updateVolumeIcon();
+                }
+            });
+            
+            // Mini mode toggle
+            document.getElementById('toggleMiniBtn').addEventListener('click', toggleMiniMode);
+            
+            // When in mini mode, clicking on the player should expand it
+            musicPlayer.addEventListener('click', function(e) {
+                // Only trigger if the player is in mini mode and the click wasn't on the toggle button
+                if (musicPlayer.classList.contains('mini-mode') && !e.target.closest('#toggleMiniBtn')) {
+                    toggleMiniMode();
+                    e.stopPropagation();
+                }
+            });
+            
+            // Toggle visualizer animation based on play/pause state
+            function toggleVisualizer(isPlaying) {
+                const visualizer = document.getElementById('visualizer');
+                const musicPlayer = document.getElementById('musicPlayer');
+                
+                if (isPlaying) {
+                    visualizer.style.display = 'flex';
+                    musicPlayer.classList.add('playing');
+                } else {
+                    visualizer.style.display = 'none';
+                    musicPlayer.classList.remove('playing');
+                }
+            }
+            
+            // Update visualizer toggle when play/pause changes
+            const originalPlaySong = playSong;
+            playSong = function() {
+                originalPlaySong();
+                toggleVisualizer(true);
+            };
+            
+            const originalPauseSong = pauseSong;
+            pauseSong = function() {
+                originalPauseSong();
+                toggleVisualizer(false);
+            };
+            
+            // Hide visualizer initially
+            document.getElementById('visualizer').style.display = 'none';
+            
+            // Add keyboard shortcuts for music player control
+            document.addEventListener('keydown', function(e) {
+                if (e.code === 'Space' && !e.target.matches('input, textarea')) {
+                    e.preventDefault(); // Prevent page scroll on space
+                    if (isPlaying) {
+                        pauseSong();
+                    } else {
+                        playSong();
+                    }
+                } else if (e.code === 'ArrowRight' && !e.target.matches('input, textarea')) {
+                    forwardTenSeconds();
+                } else if (e.code === 'ArrowLeft' && !e.target.matches('input, textarea')) {
+                    backwardTenSeconds();
+                } else if (e.code === 'ArrowUp' && !e.target.matches('input, textarea')) {
+                    prevSong();
+                } else if (e.code === 'ArrowDown' && !e.target.matches('input, textarea')) {
+                    nextSong();
+                }
+            });
+            
+            // Initialize player
+            generatePlaylist();
+            loadSong();
+            
+            // Improve audio loading behavior
+            audio.addEventListener('loadedmetadata', function() {
+                // Update duration display once the audio metadata is loaded
+                const duration = audio.duration;
+                const durationMin = Math.floor(duration / 60);
+                const durationSec = Math.floor(duration % 60);
+                const formattedDuration = `${durationMin}:${durationSec < 10 ? '0' : ''}${durationSec}`;
+                
+                // Update in the songs array
+                songs[currentSongIndex].duration = formattedDuration;
+                
+                // Update in the UI
+                totalTime.textContent = formattedDuration;
+                
+                // Update in the playlist
+                const playlistItems = document.querySelectorAll('.playlist-item');
+                if (playlistItems[currentSongIndex]) {
+                    const durationEl = playlistItems[currentSongIndex].querySelector('.song-duration');
+                    if (durationEl) {
+                        durationEl.textContent = formattedDuration;
+                    }
+                }
+            });
+            
+            // Show player after a short delay
+            setTimeout(() => {
+                musicPlayer.classList.add('expanded');
+                // Collapse after 3 seconds if not interacted with
+                setTimeout(() => {
+                    if (!isPlaying) {
+                        musicPlayer.classList.remove('expanded');
+                    }
+                }, 3000);
+            }, 1500);
+            
+            // Show player immediately but in mini mode if not playing
+            setTimeout(() => {
+                if (!isPlaying) {
+                    toggleMiniMode();
+                }
+            }, 1500);
+            
+            // Countdown Timer
+            const countdownElement = document.getElementById("countdown");
+            const weddingDate = new Date("April 5, 2025 14:00:00").getTime();
+            
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = weddingDate - now;
+                
+                if (distance < 0) {
+                    countdownElement.innerHTML = "شادی ہو چکی ہے!";
+                    return;
+                }
+                
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                countdownElement.innerHTML = `باقی وقت: ${days} دن ${hours} گھنٹے ${minutes} منٹ ${seconds} سیکنڈ`;
+            }
+            
+            setInterval(updateCountdown, 1000);
+            updateCountdown();
+            
+            // WhatsApp Link Update with proper country code format
+            const message = encodeURIComponent("Assalamualaikum Adam Khan, InshaAllah, we will definitely come to your wedding. May Allah fill your life with happiness and blessings. 🤲");
+            document.getElementById("whatsappLink").href = `https://wa.me/14379812390?text=${message}`;
+            
+            // Mobile detection and responsive adjustments
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            if (isMobile) {
+                console.log("Mobile view active");
+                // Mobile-specific adjustments
+                document.querySelectorAll('.btn').forEach(button => {
+                    button.style.width = '100%';
+                });
+            }
+
+            // Toggle player on mobile when clicking anywhere in the body
+            // (but only the first time to handle autoplay restrictions)
+            document.body.addEventListener('click', function bodyClick() {
+                // Only try to play if audio is not already playing
+                if (!isPlaying) {
+                    try {
+                        playSong();
+                    } catch (error) {
+                        console.log("Autoplay prevented:", error);
+                        // Show the player UI anyway so user can interact manually
+                        musicPlayer.classList.add('expanded');
+                    }
+                }
+                // Remove this listener after first click
+                document.body.removeEventListener('click', bodyClick);
+            }, { once: true });
+
+            // Handle autoplay restrictions by adding a body click listener
+            document.body.addEventListener('click', function bodyClick() {
+                // Only try to play if audio is not already playing
+                if (!isPlaying) {
+                    try {
+                        playSong();
+                    } catch (error) {
+                        console.log("Autoplay prevented:", error);
+                        // Show the player UI but don't auto-expand it
+                        if (musicPlayer.classList.contains('mini-mode')) {
+                            // Keep it in mini mode for less intrusion
+                        } else {
+                            // If it's already expanded, keep it that way
+                            musicPlayer.classList.add('expanded');
+                        }
+                    }
+                }
+                // Remove this listener after first click
+                document.body.removeEventListener('click', bodyClick);
+            }, { once: true });
+
+            // Initialize the player in mini-mode
+            setTimeout(() => {
+                // Start in mini mode by default
+                if (!musicPlayer.classList.contains('mini-mode')) {
+                    toggleMiniMode();
+                }
+            }, 1000);
+
+            // 3D Slideshow Implementation
+            class Slideshow {
+                constructor(container, options = {}) {
+                    this.container = document.getElementById(container);
+                    this.slidesContainer = this.container.querySelector('#slides');
+                    this.loader = this.container.querySelector('#slideshowLoader');
+                    this.dots = this.container.querySelector('#slideshowDots');
+                    this.counter = this.container.querySelector('#slideCounter');
+                    this.prevBtn = this.container.querySelector('#prevSlide');
+                    this.nextBtn = this.container.querySelector('#nextSlide');
+                    this.pauseBtn = this.container.querySelector('#pauseBtn');
+                    this.pauseIcon = this.pauseBtn.querySelector('#pauseIcon');
+                    
+                    // Default options
+                    this.options = {
+                        autoplay: true,
+                        interval: 5000,
+                        transition: 'fade',
+                        images: [],
+                        ...options
+                    };
+                    
+                    this.currentSlide = 0;
+                    this.totalSlides = this.options.images.length;
+                    this.isPlaying = this.options.autoplay;
+                    this.interval = null;
+                    this.touchStartX = 0;
+                    this.touchEndX = 0;
+                    this.progressBar = null;
+                    this.progressInterval = null;
+                    this.preloadedImages = new Set(); // Track preloaded images
+                    
+                    this.init();
+                }
+                
+                init() {
+                    if (this.options.images.length === 0) {
+                        console.error('No images provided for slideshow');
+                        this.loader.innerHTML = 'تصاویر نہیں ملیں۔ برائے مہربانی بعد میں دوبارہ کوشش کریں۔';
+                        return;
+                    }
+                    
+                    // Create progress bar
+                    this.createProgressBar();
+                    
+                    // Create dots and setup event listeners
+                    this.createDots();
+                    this.setupListeners();
+                    this.updateCounter();
+                    
+                    // Create slides
+                    this.createSlides();
+                }
+
+                // Create progress bar
+                createProgressBar() {
+                    this.progressBar = document.createElement('div');
+                    this.progressBar.className = 'slide-progress';
+                    this.container.appendChild(this.progressBar);
+                }
+
+                // Update progress bar
+                updateProgressBar(percent) {
+                    if (this.progressBar) {
+                        this.progressBar.style.width = `${percent}%`;
+                    }
+                }
+
+                // Reset and start progress bar animation
+                resetProgressBar() {
+                    clearInterval(this.progressInterval);
+                    this.updateProgressBar(0);
+                    
+                    if (this.isPlaying) {
+                        const duration = this.options.interval;
+                        const steps = 100;
+                        const increment = 100 / steps;
+                        const intervalTime = duration / steps;
+                        let progress = 0;
+                        
+                        this.progressInterval = setInterval(() => {
+                            progress += increment;
+                            this.updateProgressBar(Math.min(progress, 100));
+                            
+                            if (progress >= 100) {
+                                clearInterval(this.progressInterval);
+                            }
+                        }, intervalTime);
+                    }
+                }
+                
+                createSlides() {
+                    // Clear existing slides first
+                    this.slidesContainer.innerHTML = '';
+                    
+                    // Track loaded images count
+                    let loadedImages = 0;
+                    const totalImages = this.options.images.length;
+                    
+                    this.options.images.forEach((image, index) => {
+                        const slide = document.createElement('div');
+                        slide.className = 'slide';
+                        
+                        // Add slide to container immediately
+                        this.slidesContainer.appendChild(slide);
+                        
+                        // Preload next few images first (for smoother initial experience)
+                        const preloadFirst = 3; // Number of images to prioritize loading
+                        const shouldPrioritize = index < preloadFirst;
+                        
+                        // Enhanced error handling with multiple directory fallbacks
+                        const possiblePaths = [
+                            image.src,                           // Original path
+                            `image/${image.src}`,                // Standard image folder
+                            `images/${image.src}`,               // Alternative image folder
+                            `img/${image.src}`,                  // Another common folder
+                            `assets/images/${image.src}`,        // Assets structure 
+                            `assets/img/${image.src}`,           // Alternative assets structure
+                            `photos/${image.src}`,               // Photos folder
+                            `uploads/${image.src}`               // Uploads folder
+                        ];
+                        
+                        // Add variations with capitalized first letter in directories
+                        const baseFilename = image.src.split('/').pop();
+                        possiblePaths.push(
+                            `Image/${baseFilename}`,
+                            `Images/${baseFilename}`,
+                            `IMG/${baseFilename}`,
+                            `Photos/${baseFilename}`
+                        );
+                        
+                        // Priority load if this is one of the first few images
+                        if (shouldPrioritize) {
+                            this.tryLoadingImage(possiblePaths, 0, slide, image, () => {
+                                // Image loading complete callback
+                                loadedImages++;
+                                
+                                // Update loader message
+                                if (this.loader) {
+                                    this.loader.innerHTML = `تصاویر لوڈ ہو رہی ہیں... ${loadedImages}/${totalImages}`;
+                                }
+                                
+                                // If all priority images are processed, initialize the slideshow
+                                if (loadedImages >= Math.min(preloadFirst, totalImages)) {
+                                    // Slight delay to ensure DOM is updated
+                                    setTimeout(() => {
+                                        // Hide loader
+                                        if (this.loader) {
+                                            this.loader.style.display = 'none';
+                                        }
+                                        
+                                        // Show first slide
+                                        if (this.slidesContainer.querySelectorAll('.slide').length > 0) {
+                                            this.showSlide(0);
+                                            
+                                            // Start autoplay if enabled
+                                            if (this.isPlaying) {
+                                                this.startAutoplay();
+                                            }
+                                            
+                                            // Start progress bar
+                                            this.resetProgressBar();
+                                        }
+                                    }, 100);
+                                    
+                                    // Continue loading remaining images in the background
+                                    this.preloadRemainingImages(preloadFirst);
+                                }
+                            });
+                        } else {
+                            // Mark this index for later loading
+                            slide.dataset.pendingIndex = index;
+                        }
+                    });
+                }
+                
+                // Preload remaining images after initial slides are shown
+                preloadRemainingImages(startFrom) {
+                    const pendingSlides = this.slidesContainer.querySelectorAll('[data-pending-index]');
+                    
+                    // Process pending slides in smaller batches for better performance
+                    const processBatch = (startIdx, batchSize) => {
+                        const endIdx = Math.min(startIdx + batchSize, pendingSlides.length);
+                        let batchCompleted = 0;
+                        
+                        for (let i = startIdx; i < endIdx; i++) {
+                            const slide = pendingSlides[i];
+                            const index = parseInt(slide.dataset.pendingIndex);
+                            const image = this.options.images[index];
+                            
+                            if (!image) continue;
+                            
+                            // Enhanced error handling with multiple directory fallbacks
+                            const possiblePaths = [
+                                image.src,                           // Original path
+                                `image/${image.src}`,                // Standard image folder
+                                `images/${image.src}`,               // Alternative image folder
+                                `img/${image.src}`,                  // Another common folder
+                                `assets/images/${image.src}`,        // Assets structure 
+                                `assets/img/${image.src}`,           // Alternative assets structure
+                                `photos/${image.src}`,               // Photos folder
+                                `uploads/${image.src}`               // Uploads folder
+                            ];
+                            
+                            // Add variations with capitalized first letter in directories
+                            const baseFilename = image.src.split('/').pop();
+                            possiblePaths.push(
+                                `Image/${baseFilename}`,
+                                `Images/${baseFilename}`,
+                                `IMG/${baseFilename}`,
+                                `Photos/${baseFilename}`
+                            );
+                            
+                            this.tryLoadingImage(possiblePaths, 0, slide, image, () => {
+                                // Remove the pending attribute once loaded
+                                slide.removeAttribute('data-pending-index');
+                                batchCompleted++;
+                                
+                                // If batch is complete, process next batch
+                                if (batchCompleted === endIdx - startIdx && endIdx < pendingSlides.length) {
+                                    setTimeout(() => {
+                                        processBatch(endIdx, batchSize);
+                                    }, 100); // Small delay between batches
+                                }
+                            });
+                        }
+                    };
+                    
+                    // Start processing in batches of 3
+                    processBatch(0, 3);
+                }
+                
+                // New method to try loading images from multiple possible paths
+                tryLoadingImage(paths, index, slide, imageConfig, callback) {
+                    if (index >= paths.length) {
+                        // All paths failed, show error message
+                        console.error(`Failed to load image after trying ${paths.length} different paths`);
+                        this.showImageError(slide, paths);
+                        callback(); // Still call callback to advance counter
+                        return;
+                    }
+                    
+                    const currentPath = paths[index];
+                    
+                    // Check if we've already loaded this image path
+                    if (this.preloadedImages.has(currentPath)) {
+                        console.log(`✓ Already preloaded: ${currentPath}`);
+                        slide.style.backgroundImage = `url('${currentPath}')`;
+                        imageConfig.src = currentPath;
+                        this.addCaption(slide, imageConfig);
+                        callback();
+                        return;
+                    }
+                    
+                    const testImg = new Image();
+                    
+                    testImg.onload = () => {
+                        console.log(`✓ Success! Loaded from: ${currentPath}`);
+                        slide.style.backgroundImage = `url('${currentPath}')`;
+                        
+                        // Update the source in the options for future reference
+                        imageConfig.src = currentPath;
+                        
+                        // Add caption
+                        this.addCaption(slide, imageConfig);
+                        
+                        // Add to preloaded set
+                        this.preloadedImages.add(currentPath);
+                        
+                        // Call the callback indicating image has been processed
+                        callback();
+                    };
+                    
+                    testImg.onerror = () => {
+                        console.log(`✗ Failed path ${index+1}/${paths.length}: ${currentPath}`);
+                        
+                        // Try different extensions if base name doesn't have an extension
+                        if (index === 0 && !currentPath.match(/\.(jpg|jpeg|png|gif|webp|svg|avif)$/i)) {
+                            console.log("Trying different file extensions...");
+                            const extensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
+                            const baseName = currentPath;
+                            
+                            // Insert extension variations at the beginning of the paths array
+                            extensions.forEach((ext, i) => {
+                                paths.splice(i + 1, 0, baseName + ext);
+                            });
+                        }
+                        
+                        // Try next path
+                        this.tryLoadingImage(paths, index + 1, slide, imageConfig, callback);
+                    };
+                    
+                    testImg.src = currentPath;
+                }
+            
+                // New method to show error message when all paths fail
+                showImageError(slide, triedPaths) {
+                    slide.style.backgroundColor = '#333';
+                    const errorDiv = document.createElement('div');
+                    errorDiv.style.padding = '20px';
+                    errorDiv.style.color = 'white';
+                    errorDiv.style.textAlign = 'center';
+                    errorDiv.style.position = 'absolute';
+                    errorDiv.style.top = '50%';
+                    errorDiv.style.left = '50%';
+                    errorDiv.style.transform = 'translate(-50%, -50%)';
+                    errorDiv.style.width = '80%';
+                    
+                    let pathsList = triedPaths.slice(0, 5).map(p => `<li>${p}</li>`).join('');
+                    if (triedPaths.length > 5) {
+                        pathsList += `<li>...and ${triedPaths.length - 5} more</li>`;
+                    }
+                    
+                    errorDiv.innerHTML = `
+                        <i class="fas fa-image" style="font-size: 48px; margin-bottom: 15px;"></i>
+                        <br>تصویر لوڈ نہیں ہو سکی
+                        <div style="font-size: 12px; margin-top: 10px; opacity: 0.7; text-align: left; direction: ltr;">
+                            Check browser console for details
+                        </div>
+                    `;
+                    slide.appendChild(errorDiv);
+                }
+                
+                // New method to add caption to slide
+                addCaption(slide, image) {
+                    // Skip adding captions to remove titles and descriptions
+                    // Function intentionally left empty to remove captions
+                }
+                
+                createDots() {
+                    for (let i = 0; i < this.totalSlides; i++) {
+                        const dot = document.createElement('div');
+                        dot.className = 'dot';
+                        dot.dataset.index = i;
+                        
+                        dot.addEventListener('click', () => {
+                            this.showSlide(parseInt(dot.dataset.index));
+                            this.resetAutoplay();
+                        });
+                        
+                        this.dots.appendChild(dot);
+                    }
+                }
+                
+                setupListeners() {
+                    // Navigation buttons
+                    this.prevBtn.addEventListener('click', () => {
+                        this.prevSlide();
+                        this.resetAutoplay();
+                    });
+                    
+                    this.nextBtn.addEventListener('click', () => {
+                        this.nextSlide();
+                        this.resetAutoplay();
+                    });
+                    
+                    // Pause button
+                    this.pauseBtn.addEventListener('click', () => {
+                        this.toggleAutoplay();
+                    });
+                    
+                    // Touch events for mobile
+                    this.container.addEventListener('touchstart', (e) => {
+                        this.touchStartX = e.changedTouches[0].screenX;
+                    }, { passive: true });
+                    
+                    this.container.addEventListener('touchend', (e) => {
+                        this.touchEndX = e.changedTouches[0].screenX;
+                        this.handleSwipe();
+                    }, { passive: true });
+                    
+                    // Keyboard navigation
+                    document.addEventListener('keydown', (e) => {
+                        if (e.key === 'ArrowLeft') {
+                            this.prevSlide();
+                            this.resetAutoplay();
+                        } else if (e.key === 'ArrowRight') {
+                            this.nextSlide();
+                            this.resetAutoplay();
+                        }
+                    });
+                    
+                    // Pause on hover
+                    this.container.addEventListener('mouseenter', () => {
+                        if (this.isPlaying) {
+                            clearInterval(this.interval);
+                        }
+                    });
+                    
+                    this.container.addEventListener('mouseleave', () => {
+                        if (this.isPlaying) {
+                            this.startAutoplay();
+                        }
+                    });
+                    
+                    // Add resize handler
+                    window.addEventListener('resize', this.handleResize.bind(this));
+
+                    // Add mouse move for parallax effect
+                    this.container.addEventListener('mousemove', this.handleMouseMove.bind(this));
+                }
+
+                // New method for parallax effect
+                handleMouseMove(e) {
+                    const { left, top, width, height } = this.container.getBoundingClientRect();
+                    const x = e.clientX - left;
+                    const y = e.clientY - top;
+                    
+                    // Calculate rotation based on mouse position
+                    const rotateY = ((x / width) - 0.5) * 5; // -2.5 to 2.5 degrees
+                    const rotateX = ((y / height) - 0.5) * -5; // 2.5 to -2.5 degrees
+                    
+                    // Apply subtle rotation to active slide
+                    const activeSlide = this.slidesContainer.querySelector('.slide.active');
+                    if (activeSlide) {
+                        activeSlide.style.transform = `
+                            translateZ(0) 
+                            rotateX(${rotateX}deg) 
+                            rotateY(${rotateY}deg)
+                        `;
+                    }
+                }
+                
+                handleResize() {
+                    // Adjust any size-dependent properties here
+                    const containerHeight = this.container.offsetHeight;
+                    const containerWidth = this.container.offsetWidth;
+                    
+                    // Adjust perspective based on container size
+                    if (containerWidth < 480) {
+                        this.container.style.perspective = '800px';
+                    } else {
+                        this.container.style.perspective = '1200px';
+                    }
+                }
+                
+                handleSwipe() {
+                    const threshold = 50;
+                    if (this.touchEndX < this.touchStartX - threshold) {
+                        // Swipe left
+                        this.nextSlide();
+                        this.resetAutoplay();
+                    } else if (this.touchEndX > this.touchStartX + threshold) {
+                        // Swipe right
+                        this.prevSlide();
+                        this.resetAutoplay();
+                    }
+                }
+
+                // Get a random transition effect
+                getRandomTransition() {
+                    const effects = [
+                        'slide-effect-fade',
+                        'slide-effect-zoom',
+                        'slide-effect-slide', 
+                        'slide-effect-flip',
+                        'slide-effect-cube',
+                        'slide-effect-reveal',
+                        'slide-effect-blur',
+                        'slide-effect-swing',
+                        'slide-effect-bounce'
+                    ];
+                    return effects[Math.floor(Math.random() * effects.length)];
+                }
+                
+                showSlide(index) {
+                    const slides = this.slidesContainer.querySelectorAll('.slide');
+                    const dots = this.dots.querySelectorAll('.dot');
+                    
+                    // Verify we have slides before proceeding
+                    if (slides.length === 0) {
+                        console.error('No slides found in the slideshow');
+                        return;
+                    }
+                    
+                    // Remove all classes
+                    slides.forEach(slide => {
+                        slide.classList.remove('active', 'prev', 'next');
+                        // Remove any transition effect classes
+                        slide.className = slide.className.replace(/slide-effect-\w+/g, '').trim();
+                        slide.className = slide.className.replace(/\s+/g, ' ').trim();
+                        slide.style.transform = ''; // Reset any custom transforms
+                    });
+                    
+                    dots.forEach(dot => {
+                        dot.classList.remove('active');
+                    });
+                    
+                    // Reset progress bar for new slide
+                    this.resetProgressBar();
+                    
+                    // Calculate prev and next indices
+                    let prevIndex = index - 1;
+                    if (prevIndex < 0) prevIndex = this.totalSlides - 1;
+                    
+                    let nextIndex = index + 1;
+                    if (nextIndex >= this.totalSlides) nextIndex = 0;
+                    
+                    // Preload next slide in advance for smoother transitions
+                    this.preloadNextSlide(nextIndex);
+                    
+                    // Add appropriate classes (with safety checks)
+                    if (slides[index]) {
+                        slides[index].classList.add('active');
+                        slides[index].classList.add('slide'); // Ensure base class is present
+                        
+                        // Apply a random transition effect to the active slide
+                        const effectClass = this.getRandomTransition();
+                        slides[index].classList.add(effectClass);
+                    }
+                    
+                    if (slides[prevIndex]) slides[prevIndex].classList.add('prev');
+                    if (slides[nextIndex]) slides[nextIndex].classList.add('next');
+                    
+                    if (dots[index]) dots[index].classList.add('active');
+                    
+                    // Update current slide
+                    this.currentSlide = index;
+                    this.updateCounter();
+                    
+                    // Add 3D depth effect to container
+                    this.container.style.transform = `translateZ(${-10 * Math.sin(index * 0.5)}px)`;
+                }
+                
+                // Preload next slide in advance
+                preloadNextSlide(nextIndex) {
+                    const slides = this.slidesContainer.querySelectorAll('.slide');
+                    if (!slides[nextIndex]) return;
+                    
+                    const nextSlide = slides[nextIndex];
+                    
+                    // If this slide is still pending loading, prioritize it now
+                    if (nextSlide.hasAttribute('data-pending-index')) {
+                        const index = parseInt(nextSlide.dataset.pendingIndex);
+                        const image = this.options.images[index];
+                        
+                        if (!image) return;
+                        
+                        // Enhanced error handling with multiple directory fallbacks
+                        const possiblePaths = [
+                            image.src,                           // Original path
+                            `image/${image.src}`,                // Standard image folder
+                            `images/${image.src}`,               // Alternative image folder
+                            `img/${image.src}`,                  // Another common folder
+                            `assets/images/${image.src}`,        // Assets structure 
+                            `assets/img/${image.src}`,           // Alternative assets structure
+                            `photos/${image.src}`,               // Photos folder
+                            `uploads/${image.src}`               // Uploads folder
+                        ];
+                        
+                        // Add variations with capitalized first letter in directories
+                        const baseFilename = image.src.split('/').pop();
+                        possiblePaths.push(
+                            `Image/${baseFilename}`,
+                            `Images/${baseFilename}`,
+                            `IMG/${baseFilename}`,
+                            `Photos/${baseFilename}`
+                        );
+                        
+                        // High priority loading for next slide
+                        this.tryLoadingImage(possiblePaths, 0, nextSlide, image, () => {
+                            nextSlide.removeAttribute('data-pending-index');
+                        });
+                    }
+                }
+                
+                updateCounter() {
+                    this.counter.textContent = `${this.currentSlide + 1}/${this.totalSlides}`;
+                }
+                
+                prevSlide() {
+                    let newIndex = this.currentSlide - 1;
+                    if (newIndex < 0) {
+                        newIndex = this.totalSlides - 1;
+                    }
+                    this.showSlide(newIndex);
+                }
+                
+                nextSlide() {
+                    let newIndex = this.currentSlide + 1;
+                    if (newIndex >= this.totalSlides) {
+                        newIndex = 0;
+                    }
+                    this.showSlide(newIndex);
+                }
+                
+                startAutoplay() {
+                    clearInterval(this.interval);
+                    this.interval = setInterval(() => {
+                        this.nextSlide();
+                    }, this.options.interval);
+                    this.isPlaying = true;
+                    this.pauseIcon.className = 'fas fa-pause';
+                    
+                    // Start progress bar animation
+                    this.resetProgressBar();
+                }
+                
+                stopAutoplay() {
+                    clearInterval(this.interval);
+                    this.isPlaying = false;
+                    this.pauseIcon.className = 'fas fa-play';
+                    
+                    // Reset progress bar
+                    clearInterval(this.progressInterval);
+                    this.updateProgressBar(0);
+                }
+                
+                resetAutoplay() {
+                    if (this.isPlaying) {
+                        clearInterval(this.interval);
+                        this.startAutoplay();
+                    }
+                }
+                
+                toggleAutoplay() {
+                    if (this.isPlaying) {
+                        this.stopAutoplay();
+                    } else {
+                        this.startAutoplay();
+                    }
+                }
+            }
+            
+            // Define wedding slideshow images
+            const weddingImages = [
+                {
+                    src: 'A (1).jpg',
+                
+                },
+                {
+                    src: 'A (3).jpg',
+               
+                },
+                {
+                    src: 'A (4).jpg',
+                },
+                {
+                    src: 'A (5).jpg',
+                },
+                {
+                    src: 'A (6).jpg',
+                },
+                {
+                    src: 'A (7).jpg',
+                },
+                {
+                    src: 'A (8).jpg',
+                },
+                {
+                    src: 'A (9).jpg',
+                },
+                {
+                    src: 'A (10).jpg',
+                },
+                {
+                    src: 'A (11).jpg',
+                },
+                {
+                    src: 'A (12).jpg',
+                },
+                {
+                    src: 'A (2).jpg',
+                }
+            ];
+            
+            // Initialize the slideshow after a short delay to let the page load
+            setTimeout(() => {
+                const weddingSlideshow = new Slideshow('weddingSlideshow', {
+                    autoplay: true,
+                    interval: 5000,
+                    images: weddingImages
+                });
+                
+                // Call handle resize once to set initial perspective
+                weddingSlideshow.handleResize();
+            }, 500);
+        });
+    </script>
+    
+    <!-- Watermark -->
+    <div class="watermark">Developed by Zakiryaullah</div>
+</body>
+</html>
